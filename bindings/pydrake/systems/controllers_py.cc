@@ -37,6 +37,11 @@ PYBIND11_MODULE(controllers, m) {
                      &DynamicProgrammingOptions::visualization_callback);
 
   m.def("FittedValueIteration", WrapCallbacks(&FittedValueIteration));
+  m.def("TimedFittedValueIteration", WrapCallbacks(&TimedFittedValueIteration));
+  m.def("ParallelFittedValueIteration", WrapCallbacks(&ParallelFittedValueIteration));
+  m.def("ResumedFittedValueIteration", WrapCallbacks(&ResumedFittedValueIteration));
+  m.def("ResumedBestValueIteration", WrapCallbacks(&ResumedBestValueIteration));
+  m.def("RserialFittedValueIteration", WrapCallbacks(&RserialFittedValueIteration));
 
   m.def("LinearProgrammingApproximateDynamicProgramming",
         WrapCallbacks(&LinearProgrammingApproximateDynamicProgramming));

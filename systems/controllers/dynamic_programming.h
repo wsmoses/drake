@@ -92,6 +92,48 @@ FittedValueIteration(
     const math::BarycentricMesh<double>::MeshGrid& input_grid, double timestep,
     const DynamicProgrammingOptions& options = DynamicProgrammingOptions());
 
+std::tuple<std::unique_ptr<BarycentricMeshSystem<double>>, Eigen::RowVectorXd, double>
+TimedFittedValueIteration(
+    Simulator<double>* simulator,
+    const std::function<double(const Context<double>& context)>& cost_function,
+    const math::BarycentricMesh<double>::MeshGrid& state_grid,
+    const math::BarycentricMesh<double>::MeshGrid& input_grid, double timestep,
+    const DynamicProgrammingOptions& options = DynamicProgrammingOptions());
+
+std::tuple<std::unique_ptr<BarycentricMeshSystem<double>>, Eigen::RowVectorXd, Eigen::MatrixXd, double>
+ParallelFittedValueIteration(
+    Simulator<double>* simulator,
+    const std::function<double(const Context<double>& context)>& cost_function,
+    const math::BarycentricMesh<double>::MeshGrid& state_grid,
+    const math::BarycentricMesh<double>::MeshGrid& input_grid, double timestep,
+    const DynamicProgrammingOptions& options = DynamicProgrammingOptions());
+
+std::tuple<std::unique_ptr<BarycentricMeshSystem<double>>, Eigen::RowVectorXd, Eigen::MatrixXd, double>
+ResumedFittedValueIteration(
+    Simulator<double>* simulator,
+    const std::function<double(const Context<double>& context)>& cost_function,
+    const math::BarycentricMesh<double>::MeshGrid& state_grid,
+    const math::BarycentricMesh<double>::MeshGrid& input_grid, double timestep,
+    Eigen::RowVectorXd J, Eigen::MatrixXd Pi,
+    const DynamicProgrammingOptions& options = DynamicProgrammingOptions());
+
+std::tuple<std::unique_ptr<BarycentricMeshSystem<double>>, Eigen::RowVectorXd, Eigen::MatrixXd, double>
+ResumedBestValueIteration(
+    Simulator<double>* simulator,
+    const std::function<double(const Context<double>& context)>& cost_function,
+    const math::BarycentricMesh<double>::MeshGrid& state_grid,
+    const math::BarycentricMesh<double>::MeshGrid& input_grid, double timestep,
+    Eigen::RowVectorXd J, Eigen::MatrixXd Pi,
+    const DynamicProgrammingOptions& options = DynamicProgrammingOptions());
+
+std::tuple<std::unique_ptr<BarycentricMeshSystem<double>>, Eigen::RowVectorXd, Eigen::MatrixXd, double>
+RserialFittedValueIteration(
+    Simulator<double>* simulator,
+    const std::function<double(const Context<double>& context)>& cost_function,
+    const math::BarycentricMesh<double>::MeshGrid& state_grid,
+    const math::BarycentricMesh<double>::MeshGrid& input_grid, double timestep,
+    Eigen::RowVectorXd J, Eigen::MatrixXd Pi,
+    const DynamicProgrammingOptions& options = DynamicProgrammingOptions());
 // TODO(russt): Handle the specific case where system is control affine and the
 // cost function is quadratic positive-definite.  (Adds requirements on the
 // system and cost function (e.g. autodiff/symbolic), and doesn't need the

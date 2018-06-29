@@ -45,6 +45,8 @@ drake_cc_library(
     name = "dynamic_programming",
     srcs = ["dynamic_programming.cc"],
     hdrs = ["dynamic_programming.h"],
+    copts = ["-fcilkplus"],
+    linkopts = ["-lcilkrts"],
     deps = [
         "//common:essential",
         "//math:wrap_to",
